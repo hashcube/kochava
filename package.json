@@ -1,0 +1,12 @@
+{
+  "name": "kochava",
+  "version": "0.9.9",
+  "devkit": {
+    "clientPaths": {
+      "kochava": "js"
+    },
+    "extensions": {
+      "ios": "ios"
+    }
+  }
+}

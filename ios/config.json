@@ -1,0 +1,16 @@
+{
+  "code": [
+    "KochavaPlugin.h",
+    "KochavaPlugin.mm",
+    "TrackAndAd.h"
+  ],
+  "frameworks": [
+    "UIKit",
+    "Foundation",
+    "AdSupport",
+    "iAd",
+    "CoreLocation",
+    "SystemConfiguration",
+    "libTrackAndAd.a"
+  ]
+}
