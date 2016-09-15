@@ -16,7 +16,7 @@ Then add `kochavaAppGUID` to iOS or android section.
 
 ```
 "ios": {
-    "appsFlyerDevKey": "xxx"
+    "kochavaAppGUID": "xxx"
 },
 ```
 ## TODO
