@@ -21,8 +21,8 @@
                     appDelegate:(TeaLeafAppDelegate *)appDelegate {
   @try {
     NSDictionary *ios = [manifest valueForKey:@"ios"];
-    NSString * const KOCHAVA_APP_ID = [ios valueForKey:@"kochavaAppGUID"];
-    NSDictionary * initDict = [NSDictionary dictionaryWithObjectsAndKeys:
+    NSString *const KOCHAVA_APP_ID = [ios valueForKey:@"kochavaAppGUID"];
+    NSDictionary *initDict = [NSDictionary dictionaryWithObjectsAndKeys:
                               KOCHAVA_APP_ID, @"kochavaAppId",
                               nil];
 
@@ -41,7 +41,7 @@
     
   @try {
     if([jsonObject objectForKey:@"uid"]) {
-      NSString *uid = [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"uid"]];
+      NSString *uid = [NSString stringWithFormat:@"%@", [jsonObject valueForKey:@"uid"]];
       NSDictionary *identityLinkData = [NSDictionary dictionaryWithObjectsAndKeys:
                     uid, @"customer_id",
                     nil];
