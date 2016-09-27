@@ -76,11 +76,11 @@ public class KochavaPlugin implements IPlugin {
 			String purchaseData = receiptdata.getString("purchaseData");
 			String dataSignature = receiptdata.getString("dataSignature");
 
-            // place the Purchase Data and Data Signature into an object to pass to the method
-            HashMap < String, String > receiptObject = new HashMap < String, String > ();
-            receiptObject.put("purchaseData", purchaseData);
-            receiptObject.put("dataSignature", dataSignature);
-            kTracker.eventWithReceipt("Purchase", json, receiptObject);
+			// place the Purchase Data and Data Signature into an object to pass to the method
+			HashMap < String, String > receiptObject = new HashMap < String, String > ();
+			receiptObject.put("purchaseData", purchaseData);
+			receiptObject.put("dataSignature", dataSignature);
+			kTracker.eventWithReceipt("Purchase", json, receiptObject);
 		} catch (JSONException ex) {
 			ex.printStackTrace();
 		}
