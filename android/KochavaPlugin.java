@@ -24,7 +24,7 @@ public class KochavaPlugin implements IPlugin {
 	private Feature kTracker;
 	private Activity mActivity;
 	private Context mContext;
-	private boolean DEBUG = true;
+	private boolean DEBUG = false;
 
 	public KochavaPlugin() {
 	}
@@ -72,18 +72,18 @@ public class KochavaPlugin implements IPlugin {
 			String receipt = data.getString("receipt");
 
 			JSONObject receiptdata = new JSONObject(receipt);
-
-			String purchaseData = receiptdata.getString("purchaseData");
-			String dataSignature = receiptdata.getString("dataSignature");
-
-			// place the Purchase Data and Data Signature into an object to pass to the method
-			HashMap < String, String > receiptObject = new HashMap < String, String > ();
-			receiptObject.put("purchaseData", purchaseData);
-			receiptObject.put("dataSignature", dataSignature);
-			kTracker.eventWithReceipt("Purchase", json, receiptObject);
 		} catch (JSONException ex) {
 			ex.printStackTrace();
 		}
+
+		String purchaseData = receiptdata.getString("purchaseData");
+		String dataSignature = receiptdata.getString("dataSignature");
+
+		// place the Purchase Data and Data Signature into an object to pass to the method
+		HashMap < String, String > receiptObject = new HashMap < String, String > ();
+		receiptObject.put("purchaseData", purchaseData);
+		receiptObject.put("dataSignature", dataSignature);
+		kTracker.eventWithReceipt("Purchase", json, receiptObject);
 	}
 
 	public void onResume() {
