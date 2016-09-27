@@ -1,0 +1,12 @@
+{
+  "copyFiles": [
+   "KochavaPlugin.java"
+  ],
+  "libraries": [
+  ],
+  "jars": [
+    "libs/KochavaSDK.jar"
+  ],
+  "injectionXML": "manifest.xml",
+  "injectionXSL": "manifest.xsl"
+}

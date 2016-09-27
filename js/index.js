@@ -20,9 +20,10 @@ var Kochava = Class(function () {
     });
   };
 
-  this.trackPurchase = function (receipt, item, revenue,
+  this.trackPurchase = function (uid, receipt, item, revenue,
     currency, transaction_id) {
     pluginSend('trackPurchase', {
+      uid: uid,
       receipt: receipt,
       transactionId: transaction_id,
       productId: item,
@@ -30,15 +31,6 @@ var Kochava = Class(function () {
       currency: currency
     });
   };
-
-  this.trackEventWithValue = function (event_name, value) {
-    var params = {
-      event_name: event_name,
-      value: value
-    };
-    pluginSend('trackEventWithValue', params);
-  };
-
 });
 
 exports = new Kochava();
