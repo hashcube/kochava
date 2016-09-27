@@ -36,13 +36,10 @@ public class KochavaPlugin implements IPlugin {
 	public void onCreate(Activity activity, Bundle savedInstanceState) {
 		this.mActivity = activity;
 
-		logger.log("ROHAN Kochava onCreate");
 		PackageManager manager = activity.getPackageManager();
 		String kochavaKey = "";
 		try {
 			Bundle meta = manager.getApplicationInfo(activity.getPackageName(), PackageManager.GET_META_DATA).metaData;
-			logger.log("ROHAN Kochava meta " + meta.get("kochavaAppGUID"));
-			logger.log("ROHAN Random key meta " + meta.get("gameanalyticsGameKey"));
 
 			if (meta != null) {
 				kochavaKey = meta.get("kochavaAppGUID").toString();
@@ -57,8 +54,6 @@ public class KochavaPlugin implements IPlugin {
 	}
 
 	public void setUserId(String json) {
-		logger.log("ROHAN Kochava set User ID", json);
-
 		try {
 			JSONObject data = new JSONObject(json);
 			String userId = data.getString("uid");
@@ -72,8 +67,6 @@ public class KochavaPlugin implements IPlugin {
 	}
 
 	public void trackPurchase(String json) {
-		logger.log("ROHAN Kochava TRACK Purchase");
-
 		try {
 			JSONObject data = new JSONObject(json);
 			String receipt = data.getString("receipt");
@@ -83,8 +76,6 @@ public class KochavaPlugin implements IPlugin {
 			String purchaseData = receiptdata.getString("purchaseData");
 			String dataSignature = receiptdata.getString("dataSignature");
 
-			logger.log("ROHAN Kochava purchaseData " + purchaseData);
-			logger.log("ROHAN Kochava dataSignature " + dataSignature);
             // place the Purchase Data and Data Signature into an object to pass to the method
             HashMap < String, String > receiptObject = new HashMap < String, String > ();
             receiptObject.put("purchaseData", purchaseData);
