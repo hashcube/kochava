@@ -67,17 +67,19 @@ public class KochavaPlugin implements IPlugin {
 	}
 
 	public void trackPurchase(String json) {
+		String purchaseData = "";
+		String dataSignature = "";
+
 		try {
 			JSONObject data = new JSONObject(json);
 			String receipt = data.getString("receipt");
 
 			JSONObject receiptdata = new JSONObject(receipt);
+			purchaseData = receiptdata.getString("purchaseData");
+			dataSignature = receiptdata.getString("dataSignature");
 		} catch (JSONException ex) {
 			ex.printStackTrace();
 		}
-
-		String purchaseData = receiptdata.getString("purchaseData");
-		String dataSignature = receiptdata.getString("dataSignature");
 
 		// place the Purchase Data and Data Signature into an object to pass to the method
 		HashMap < String, String > receiptObject = new HashMap < String, String > ();
