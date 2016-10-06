@@ -86,9 +86,4 @@
     [self.kochavaTracker trackEvent:eventTitle :jsonString];
   }
 }
-
-- (void) handleOpenURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication {
-  [self.kochavaTracker sendDeepLink:url:sourceApplication];
-}
-
 @end
