@@ -18,3 +18,10 @@ Then add `kochavaAppGUID` to iOS or android section.
 "ios": {
     "kochavaAppGUID": "xxx"
 },
+
+OR
+
+"android": {
+    "kochavaAppGUID": "xxx"
+},
+
