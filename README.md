@@ -7,9 +7,7 @@ Please get the Kochava App GUID from the dashboard.
 Include this module as a dependency in your game's manifest file.
 
 ```
-"dependencies": {
-    "kochava": "https://github.com/hashcube/kochava.git#master"
-}
+devkit install https://github.com/hashcube/kochava.git
 ```
 
 Then add `kochavaAppGUID` to iOS or android section.
