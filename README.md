@@ -18,7 +18,3 @@ Then add `kochavaAppGUID` to iOS or android section.
 "ios": {
     "kochavaAppGUID": "xxx"
 },
-```
-## TODO
-Events Support
-Android Support
