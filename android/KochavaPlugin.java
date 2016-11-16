@@ -51,8 +51,6 @@ public class KochavaPlugin implements IPlugin {
     kTracker = new Feature (mContext, kochavaKey);
     kTracker.setErrorDebug(DEBUG);
     kTracker.enableDebug(DEBUG);
-
-    kTracker.event("SessionStart", "");
   }
 
   public void setUserId(String json) {
