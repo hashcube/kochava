@@ -7,9 +7,10 @@
 <!-- GameThrive -->
 <meta-data android:name="kochavaAppGUID" android:value="" />
 
-<receiver android:name="com.kochava.android.tracker.ReferralCapture" android:exported="true" >
+<receiver android:name ="com.kochava.base.ReferralReceiver"
+        android:exported ="true">
   <intent-filter>
-    <action android:name="com.android.vending.INSTALL_REFERRER" />
+    <action android:name ="com.android.vending.INSTALL_REFERRER" />
   </intent-filter>
 </receiver>
 
