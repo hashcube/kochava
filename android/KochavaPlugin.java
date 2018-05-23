@@ -1,14 +1,11 @@
 package com.tealeaf.plugin.plugins;
 
-import com.tealeaf.logger;
 import com.tealeaf.plugin.IPlugin;
 import java.io.*;
-import java.util.Map;
-import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.kochava.android.tracker.Feature;
+import com.kochava.base.Tracker;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,8 +18,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 
 public class KochavaPlugin implements IPlugin {
 
-  private Feature kTracker;
-  private Activity mActivity;
   private Context mContext;
   private boolean DEBUG = false;
 
@@ -34,23 +29,24 @@ public class KochavaPlugin implements IPlugin {
   }
 
   public void onCreate(Activity activity, Bundle savedInstanceState) {
-    this.mActivity = activity;
 
     PackageManager manager = activity.getPackageManager();
-    String kochavaKey = "";
+    String kochavaKey;
     try {
       Bundle meta = manager.getApplicationInfo(activity.getPackageName(), PackageManager.GET_META_DATA).metaData;
 
       if (meta != null) {
         kochavaKey = meta.get("kochavaAppGUID").toString();
+        Tracker.configure(new Tracker.Configuration(mContext)
+          .setAppGuid(kochavaKey));
+
+        if (DEBUG) {
+          Tracker.configure(new Tracker.Configuration(mContext).setLogLevel(Tracker.LOG_LEVEL_DEBUG));
+        }
       }
     } catch (Exception e) {
       android.util.Log.d("Kochava EXCEPTION", "" + e.getMessage());
     }
-
-    kTracker = new Feature (mContext, kochavaKey);
-    kTracker.setErrorDebug(DEBUG);
-    kTracker.enableDebug(DEBUG);
   }
 
   public void setUserId(String json) {
@@ -58,34 +54,35 @@ public class KochavaPlugin implements IPlugin {
       JSONObject data = new JSONObject(json);
       String userId = data.getString("uid");
 
-      Map<String, String> send_data = new HashMap<String, String>();
-      send_data.put("uid" , userId);
-      kTracker.linkIdentity(send_data);
+      Tracker.setIdentityLink(new Tracker.IdentityLink()
+        .add("user_id", userId));
     } catch (JSONException ex) {
       ex.printStackTrace();
     }
   }
 
   public void trackPurchase(String json) {
-    String purchaseData = "";
-    String dataSignature = "";
+    String dataSignature;
+    JSONObject receiptdata;
+    String receipt;
 
     try {
       JSONObject data = new JSONObject(json);
-      String receipt = data.getString("receipt");
+      receipt = data.getString("receipt");
 
-      JSONObject receiptdata = new JSONObject(receipt);
-      purchaseData = receiptdata.getString("purchaseData");
+      receiptdata = new JSONObject(receipt);
       dataSignature = receiptdata.getString("dataSignature");
+
+      Tracker.sendEvent(new Tracker.Event(Tracker.EVENT_TYPE_PURCHASE)
+        .setGooglePlayReceipt(receipt, dataSignature)
+        .setName(data.getString("productId"))
+        .setCurrency(receiptdata.getString("localCurrency"))
+        .setPrice(Double.parseDouble(receiptdata.getString("localPrice")))
+      );
+
     } catch (JSONException ex) {
       ex.printStackTrace();
     }
-
-    // place the Purchase Data and Data Signature into an object to pass to the method
-    HashMap < String, String > receiptObject = new HashMap < String, String > ();
-    receiptObject.put("purchaseData", purchaseData);
-    receiptObject.put("dataSignature", dataSignature);
-    kTracker.eventWithReceipt("Purchase", json, receiptObject);
   }
 
   public void onResume() {
