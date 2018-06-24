@@ -2,12 +2,7 @@
   "copyFiles": [
    "KochavaPlugin.java"
   ],
-  "libraries": [
-  ],
-  "jars": [
-    "libs/tracker-3.4.0.jar",
-    "libs/install-referer-1.0.jar"
-  ],
   "injectionXML": "manifest.xml",
-  "injectionXSL": "manifest.xsl"
+  "injectionXSL": "manifest.xsl",
+  "injectionTealeafModuleGradleXML": "gradletealeaf.xml"
 }
