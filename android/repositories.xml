@@ -1,0 +1,4 @@
+//<!--START_PLUGINS_REPOSITORIES-->
+	//<!--Ironsource Dependencies-->
+maven {url "http://kochava.bintray.com/maven"}
+//<!--END_PLUGINS_REPOSITORIES-->
