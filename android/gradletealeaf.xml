@@ -2,6 +2,8 @@
 	//<!--Kochava-->
 	implementation 'com.kochava.base:tracker:3.4.0'
 	implementation 'com.google.android.gms:play-services-ads-identifier:15.0.1'
+	implementation 'com.google.android.gms:play-services-ads:15.0.1'
+	 implementation 'com.google.android.gms:play-services-location:15.0.1'
 	//Required: Install Referrer (If publishing to the Google Play Store)
      implementation 'com.android.installreferrer:installreferrer:1.0'
 //<!--END_PLUGINS_DEPENDENCIES-->
