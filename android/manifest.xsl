@@ -4,7 +4,7 @@
   <xsl:param name="kochavaAppGUID"></xsl:param>
 
   <xsl:template match="meta-data[@android:name='kochavaAppGUID']">
-    <meta-data android:name="kochavaAppGUID" android:value="\ {$kochavaAppGUID}"/>
+    <meta-data android:name="kochavaAppGUID" android:value="{$kochavaAppGUID}"/>
   </xsl:template>
 
  <!--    <xsl:strip-space elements="*" />-->
