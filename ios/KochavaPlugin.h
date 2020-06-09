@@ -1,5 +1,5 @@
 #import "PluginManager.h"
-#import "TrackAndAd.h"
+#import "KochavaTracker.h"
 
 @interface KochavaPlugin: GCPlugin
   @property (assign) KochavaTracker *kochavaTracker;

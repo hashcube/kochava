@@ -22,11 +22,10 @@
   @try {
     NSDictionary *ios = [manifest valueForKey:@"ios"];
     NSString *const KOCHAVA_APP_ID = [ios valueForKey:@"kochavaAppGUID"];
-    NSDictionary *initDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                              KOCHAVA_APP_ID, @"kochavaAppId",
-                              nil];
 
-    self.kochavaTracker = [[KochavaTracker alloc] initKochavaWithParams:initDict];
+    self.kochavaTracker = [[KochavaTracker alloc]
+      initWithParametersDictionary:@{kKVAParamAppGUIDStringKey:
+      KOCHAVA_APP_ID} delegate:nil];
 
     // To enable log messages 
     // NOTE: DO NOT ENABLE FOR PRODUCTION BUILDS
@@ -45,7 +44,7 @@
       NSDictionary *identityLinkData = [NSDictionary dictionaryWithObjectsAndKeys:
                     uid, @"customer_id",
                     nil];
-      [self.kochavaTracker identityLinkEvent:identityLinkData];
+      [self.kochavaTracker sendIdentityLinkWithDictionary:identityLinkData];
     }
   }
   @catch (NSException *exception) {
@@ -54,22 +53,16 @@
 }
 
 - (void) trackPurchase:(NSDictionary *)jsonObject {
-    NSDictionary *valuePayload = @{
-              @"currency": [NSString stringWithFormat:@"%@", [jsonObject valueForKey:@"currency"]],
-              @"sum": [NSString stringWithFormat:@"%@", [jsonObject valueForKey:@"revenue"]],
-              @"items_in_basket": @"1",
-              @"checkout_as_guest": @"false"
-           };
+    KochavaEvent *event = [KochavaEvent eventWithEventTypeEnum:KochavaEventTypeEnumPurchase];
 
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:valuePayload 
-                                            options:0 error:&error];
-    if(jsonData) {
-      NSString *jsonString = [[NSString alloc] initWithData:jsonData
-                                               encoding:NSUTF8StringEncoding];
-      [self.kochavaTracker trackEvent:@"Purchase" withValue:jsonString
-                      andReceipt:[jsonObject valueForKey:@"receipt"]];
-    }
+    event.currencyString = [NSString stringWithFormat:@"%@", [jsonObject valueForKey:@"currency"]];
+    event.checkoutAsGuestString = @"false";
+    event.itemAddedFromString = @"1";
+    event.infoString = [NSString stringWithFormat:@"%@", [jsonObject valueForKey:@"revenue"]];
+    event.receiptIdString = [NSString stringWithFormat:@"%@", [jsonObject valueForKey:@"transactionId"]];
+    event.appStoreReceiptBase64EncodedString = [NSString stringWithFormat:@"%@", [jsonObject valueForKey:@"receipt"]];
+
+    [self.kochavaTracker sendEvent:event];
 }
 
 //TODO: To be tested
@@ -83,7 +76,7 @@
   if(jsonData) {
     NSString *jsonString = [[NSString alloc] initWithData:jsonData
                                              encoding:NSUTF8StringEncoding];
-    [self.kochavaTracker trackEvent:eventTitle :jsonString];
+    [self.kochavaTracker sendEventWithNameString:eventTitle infoString:jsonString];
   }
 }
 @end
