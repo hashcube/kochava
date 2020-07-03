@@ -2,15 +2,38 @@
   "code": [
     "KochavaPlugin.h",
     "KochavaPlugin.mm",
-    "TrackAndAd.h"
+    "KVAAsForContextObjectProtocol.h",
+    "KVAPartner.h",
+    "KVAConfigureWithObjectProtocol.h",
+    "KVAProduct.h",
+    "KVAConsent.h",
+    "KVASendEventFuncProvider.h",
+    "KVAContext.h",
+    "KVASharedPropertyProvider.h",
+    "KVACoreProduct.h",
+    "KVASystem.h",
+    "KVAFromObjectProtocol.h",
+    "KochavaCore.h",
+    "KVALog.h",
+    "KochavaEvent.h",
+    "KVALogLevel.h",
+    "KVADeeplink.h",
+    "KVATrackerProduct.h",
+    "KVATracker.h",
+    "KochavaTracker.h"
   ],
   "frameworks": [
-    "UIKit",
     "Foundation",
+    "UIKit",
+    "AVFoundation",
     "AdSupport",
-    "iAd",
+    "CoreGraphics",
     "CoreLocation",
+    "CoreTelephony",
+    "iAd",
     "SystemConfiguration",
-    "libTrackAndAd.a"
+    "WebKit",
+    "libKochavaCoreiOS.a",
+    "libKochavaTrackeriOS.a"
   ]
 }
